@@ -15,8 +15,13 @@
 require 'date'
 
 class Cat < ApplicationRecord
+
+  def self.colors
+    %W(Tortoiseshell Calico Orange Brown Gray Black White Tuxedo Nyancat)
+  end
+
   validates :birth_date, :color, :name, :sex, :description, presence: true
-  validates :color, inclusion: { in: %w(brown black) }
+  validates :color, inclusion: { in: colors }
   validates :sex, inclusion: { in: %w(M F) }
 
   def age

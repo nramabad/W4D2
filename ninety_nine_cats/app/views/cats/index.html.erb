@@ -1,0 +1,10 @@
+ALL OF THE CATS IN THE WORLD!
+
+<ul>
+  <% @cats.each do |cat| %>
+    <li>
+      Name: <%= cat.name %>
+    </li>
+    <a href = "<%= cat_url(cat) %>"> Show meh kitteh </a>
+  <% end %>
+</ul>
