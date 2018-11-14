@@ -1,0 +1,38 @@
+<% action_url = (action == :edit ? cat_url(cat) : cats_url) %>
+
+<form action="<%=action_url%>" method="post">
+
+  <% if action == :edit %>
+    <input type="hidden" name="_method" value="patch">
+  <% end %>
+
+  <label>
+    Name: <input type="text" name="cats[name]" value="<%= cat.name if action == :edit %>" >
+  </label>
+  <br>
+  <label>
+    Sex:
+    <input type="radio" <%= "checked" if action == :edit && cat.sex == "M"%> name="cats[sex]" value="M" > Male
+    <input type="radio" <%= "checked" if action == :edit && cat.sex == "F"%> name="cats[sex]" value="F" > Female
+  </label>
+  <br>
+  <label>
+    Color:
+    <select name="cats[color]">
+      <option disabled <%="selected" if action == :new || !Cat.colors.include?(cat.color) %> >Please Select Color</option>
+      <% Cat.colors.each do |color| %>
+        <option value="<%=color%>" <%="selected" if action == :edit && cat.color == color%> ><%=color%></option>
+      <% end %>
+    </select>
+  </label>
+  <br>
+  <label>
+    Birth Date: <input type="date" name="cats[birth_date]" value="<%= cat.birth_date if action == :edit %>" >
+  </label>
+  <br>
+  <label>
+    Description: <input type="textarea" name="cats[description]" value="<%= cat.description if action == :edit %>" >
+  </label>
+  <br>
+  <input type="submit" value="<%= action == :edit ? 'Edit Kitteh' : 'New Kitteh' %>">
+</form>
